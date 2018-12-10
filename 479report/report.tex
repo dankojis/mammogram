@@ -36,7 +36,7 @@
 {\tt\small zni32@wisc.edu}
 \and
 Second Author\\
-{\tt\small cwei@wisc.edu}
+{\tt\small secondauthor@wisc.edu}
 \and
 Third Author\\
 {\tt\small thirdauthor@wisc.edu}
@@ -81,32 +81,83 @@ High-Resolution Breast Cancer Screening with Multi-View Deep Convolutional Neura
 
 %{Table \ref{tab:some-table} shows an example for formatting a table.
 
-\begin{table}
-\begin{center}
-\begin{tabular}{|l|c|}
-\hline
-Method & Accuracy \\
-\hline\hline
-Method 1 & $70 \pm 3$ \% \\
- Method 2 & $76 \pm 3$ \% \\
-\hline
-\end{tabular}
-\end{center}
-\label{tab:some-table}
-\caption{This is an example of a table.}
-\end{table}
-
-
-
 \section{Proposed Method}
 
-\subsection{KNN}
+\subsection{kNN}
 
-k-nearest neighbors algorithm (KNN) is a non-parametric method used for classification and regression. Here, we will use the KNN to solve the classification problem. In k-NN classification, the output is a class membership. An object is classified by a majority vote of its neighbors, with the object being assigned to the class most common among its k nearest neighbors (k is a positive integer, typically small). If k = 1, then the object is simply assigned to the class of that single nearest neighbor.
+K-nearest neighbors algorithm (kNN) is a non-parametric method used for classification and regression. Here, we will use the kNN to solve the classification problem. In k-NN classification, the output is a class membership. An object is classified by a majority vote of its neighbors, with the object being assigned to the class most common among its k nearest neighbors (k is a positive integer, typically small). If k = 1, then the object is simply assigned to the class of that single nearest neighbor.
+
+\begin{figure}[ht]
+\begin{center}
+   \includegraphics[width=0.8\linewidth]{figures/kNNalgorithm.png}
+\end{center}
+   \caption{Illustration of kNN for a 3-class problem with k=5.}
+\label{kNNalgorithm}
+\end{figure}
+
+The K-Nearest Neighbor classifier usually applies either the Euclidean distance or the cosine similarity between the training samples and the test sample. And here we use the Euclidean distance. The Euclidean distance between a training sample and a test sample can be derived as follows:
+
+Let $X_{i}$ be an input sample with $p$ features $(x_{i1}, x_{i2}, \ldots, x_{ip})$
+
+Let n be the total number of input samples (i = 1, 2, …, n)
+
+Let p be the total number of features (j = 1, 2, …, p)
+
+The Euclidean distance between sample $X_{i}$ and $X_{t}(t = 1, 2, \ldots, n)$ can be defined as
+
+$$d(x_{i},x_{t})=\sqrt{(x_{i1}-x_{t1})^2+(x_{i2}-x_{t2})^2+\ldots+(x_{in}-x_{tn})^2}$$
+
+The nearest sample is determined by the closest distance to the test sample. The K-NN rule is to assign to a test sample the majority category label of its K-Nearest training sample.
+
+In this project, if we apply the kNN directly to the mammographies, the sample is the matrix of mammographies, which can be treated as the following form.
+
+$$<x_{1},x_{2},\ x_{3},\ \ldots,\ x_{n}>$$
+
+where $x_{i}$ is 1024$\times$1 vector and n=1024.
 
 
 
+\subsection{Random forests}
 
+Random forests or random decision forests are an ensemble learning method for classification, regression and other tasks that operates by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees.\cite{ho1995random} \cite{barandiaran1998random} Compared with common decision, random forests can effectively correct for decision trees' habit of overfitting to their training set.
+
+\paragraph{Bagging} The training algorithm for random forests applies the general technique of bootstrap aggregating, or bagging, to tree learners. Given a training set $X = x_1, \ldots, x_n$ with responses $Y = y_1, \ldots, y_n$, bagging repeatedly ($B$ times) selects a random sample with replacement of the training set and fits trees to these samples:\\
+
+For $b = 1, \ldots, B$:
+
+1.Sample, with replacement, $n$ training examples from $X, Y$; call these $X_b, Y_b$.
+
+2.Train a classification or regression tree fb on $X_b, Y_b$.\\
+
+After training, predictions for unseen samples $x'$ can be made by averaging the predictions from all the individual regression trees on $x'$:
+
+$${\displaystyle {\hat {f}}={\frac {1}{B}}\sum _{b=1}^{B}f_{b}(x')}$$
+
+or by taking the majority vote in the case of classification trees.
+
+This bootstrapping procedure leads to better model performance because it decreases the variance of the model, without increasing the bias. This means that while the predictions of a single tree are highly sensitive to noise in its training set, the average of many trees is not, as long as the trees are not correlated. Simply training many trees on a single training set would give strongly correlated trees (or even the same tree many times, if the training algorithm is deterministic); bootstrap sampling is a way of de-correlating the trees by showing them different training sets.
+
+Additionally, an estimate of the uncertainty of the prediction can be made as the standard deviation of the predictions from all the individual regression trees on x':
+
+$${\displaystyle \sigma ={\sqrt {\frac {\sum _{b=1}^{B}(f_{b}(x')-{\hat {f}})^{2}}{B-1}}}.}$$
+
+The number of samples/trees, $B$, is a free parameter. Typically, a few hundred to several thousand trees are used, depending on the size and nature of the training set. An optimal number of trees $B$ can be found using cross-validation, or by observing the out-of-bag error: the mean prediction error on each training sample $x_i$, using only the trees that did not have $x_i$ in their bootstrap sample. The training and test error tend to level off after some number of trees have been fit.
+
+\paragraph{From bagging to random forests} The above procedure describes the original bagging algorithm for trees. Random forests differ in only one way from this general scheme: they use a modified tree learning algorithm that selects, at each candidate split in the learning process, a random subset of the features.
+
+\url{https://en.wikipedia.org/wiki/Random_forest#cite_note-elemstatlearn-3}
+
+\subsection{ANN}
+
+An artificial neural network(ANN) is a network of simple elements called artificial neurons, which receive input, change their internal state (activation) according to that input, and produce output depending on the input and activation. ANN can be divided into a lot of classifications according to the structure of the model (The configurations of VGG models are showed in Figure \ref{VGG}). And what we used in the report is VGG16. VGG16 is a basic method with totally 16 layers in the model. \cite{simonyan2014very} 
+
+\begin{figure}[t]
+\begin{center}
+   \includegraphics[width=1\linewidth]{figures/VGG.png}
+\end{center}
+   \caption{\textbf{ConvNet configurations} (shown in columns). The depth of the configurations increases from the left (A) to the right (E), as more layers are added (the added layers are shown in bold). The convolutional layer parameters are denoted as “conv⟨receptive field size⟩-⟨number of channels⟩”. The ReLU activation function is not shown for brevity.}
+\label{VGG}
+\end{figure}
 
 \section{Experiments}
 
@@ -148,77 +199,77 @@ Secondly, the images are recorded not so well. There are many bright spots and l
 
 Another problem is the high dimension. The images are in shape 1024*1024. This will cost us a lot of time to train the model. So we use the PCA method to deduct the dimension to 4*1024 which still save 97\% of the information, but only use 1/256 of the original features. 
 
-\subsection{KNN and random forest}
+\subsection{kNN and random forest}
 
-KNN and random forest are two very basic but effective machine learning method. Using KNN and random forest is quite simple for the data has been processed well enough. We simply split the data set into training set(70\%) and test set(30\%). Since the amount of samples is very small, the number of a certain class may be only 7 or 8, after splitting the original data set into training set and test set, there is no more space to do cross validation.
+kNN and random forests are two very basic but effective machine learning method. Using kNN and random forests is quite simple for the data has been processed well enough. We simply split the data set into training set(70\%) and test set(30\%). Since the amount of samples is very small, the number of a certain class may be only 7 or 8, after splitting the original data set into training set and test set, there is no more space to do cross validation.
 
-We tried several coefficients for the two models. After several experiments we find that KNN and random forest both reach an accuracy of 60\% to 65\%. The accuracy reached the highest when n=9 for KNN, which is 64.65\%. While the highest accuracy for random forest is 63.64\% when n\_estimators = 20. It seems KNN has a higher accuracy than random forest, however, if we see it carefully, none of the abnormal class other than CALC is predicted correctly. So basically, it’s a predictor considering everything normal. As for random forest, though it has a lower accuracy, the recall scores show that this predictor successfully predict a few samples for different classes. I believe with a larger amount of samples, we will get a better performance. (see Figure \ref{knn1} and Figure \ref{rf1})
+We tried several coefficients for the two models. After several experiments we find that kNN and random forests both reach an accuracy of 60\% to 65\%. The accuracy reached the highest when n=9 for kNN, which is 64.65\%. While the highest accuracy for random forests is 63.64\% when n\_estimators = 20. It seems kNN has a higher accuracy than random forest, however, if we see it carefully, none of the abnormal class other than CALC is predicted correctly. So basically, it’s a predictor considering everything normal. As for random forest, though it has a lower accuracy, the recall scores show that this predictor successfully predict a few samples for different classes. I believe with a larger amount of samples, we will get a better performance. (see Figure \ref{kNN1} and Figure \ref{rf1})
 
 \begin{figure}[h]
 \begin{center}
-   \includegraphics[width=1\linewidth]{figures/knn1.png}
+   \includegraphics[width=1\linewidth]{figures/kNN1.png}
 \end{center}
-   \caption{The accuracy of raw KNN algorithm.}
-\label{knn1}
+   \caption{The accuracy of raw kNN algorithm.}
+\label{kNN1}
 \end{figure}
 
 \begin{figure}[h]
 \begin{center}
    \includegraphics[width=1\linewidth]{figures/rf1.png}
 \end{center}
-   \caption{The accuracy of raw random forest algorithm.}
+   \caption{The accuracy of raw random forests algorithm.}
 \label{rf1}
 \end{figure}
 
-It’s important to emphasize that the cases in this dataset is very complicated. It’s harder than the original image processing. The abnormality we are trying to find is located in different places in the images, the breast part locates in different places, and there is even some images with two different types of abnormality. So we need to do more work when we are using KNN and random forest. This will be introduced in the next part.
+It’s important to emphasize that the cases in this dataset is very complicated. It’s harder than the original image processing. The abnormality we are trying to find is located in different places in the images, the breast part locates in different places, and there is even some images with two different types of abnormality. So we need to do more work when we are using kNN and random forest. This will be introduced in the next part.
 
-\subsection{Improved KNN and random forest}
+\subsection{Improved kNN and random forest}
 
-From the previous result, we can see that the accuracy of the specific classification of the cancer type is extremely bad, which is even all zero (KNN) and about 40\% for random forest. We can see that it is not only the problem of the dataset, but also due to the basic structure of the algorithms. From the previous research, we can see that there are some featured problems causing the low accuracy, and in this part, we will try to do some targeted changes to improve the KNN and Random forests. Additionally, to get the more useful result, we reduce the labels into just Normal and Cancer. Then, the problem becomes a Binary classification problem. 
+From the previous result, we can see that the accuracy of the specific classification of the cancer type is extremely bad, which is even all zero (kNN) and about 40\% for random forest. We can see that it is not only the problem of the dataset, but also due to the basic structure of the algorithms. From the previous research, we can see that there are some featured problems causing the low accuracy, and in this part, we will try to do some targeted changes to improve the kNN and Random forests. Additionally, to get the more useful result, we reduce the labels into just Normal and Cancer. Then, the problem becomes a Binary classification problem. 
 
 As we know from the previous parts, one kind of problems may occur when the position of the cancer core differs. While the whole image is rather big (1024x1024) and the radius of the cores are mostly about 40, the position of the cancer core in the picture has a very vital impact on the accuracy. Thus, we tried to split the whole pic into the small pieces, like small squares. We use the coordinates (x, y) provided in the labels and the median of the radius to extract the cores out of the picture. Then, we randomly pick up squares of the same size from the normal samples. Due to this operation, the effect of the position of cores can be erased because if the cores appear on the picture, they will take the majority of the area. Another benefit of this operation is that the size of the picture has been successfully reduced to 20x20, which is rather smaller than the raw samples. This means the computational efficiency has been improved a lot.
 
 Another problem is the dataset itself. We can see that besides the distribution problem, the whole dataset only contains 330 samples, while some of them are still repetitive. Small size means the outliers may have a big impact on the final result, and also will easily lead to overfitting problems for the models. For the distribution problem, we tried replication way to balance the distribution. Here, for the data size problem, we considered some oversampling techniques. Using elastic distortions, one image can be used to generate many images that are real-world feasible and label preserving. There are several types of elastic distortions, like perspective transforms, rotation, shearing, cropping, and random erasing. With only a few operations, we can produce a large number of samples which is applicable in the model. Here, because the size of the samples is important in our classification, we decide to choose the size preserving ways, rotation and transition. To control the distribution of the dataset, we keep the ratio between the core parts and the normal parts 1:2. 
 
-Because the size of the samples is already small enough, we didn’t use PCA method to reduce the dimension of the samples this time. We directly apply the KNN method to the samples. We split the whole samples into training set and test set. Then we use the KNN and random forest to see wether the outcome improved. From the code, we can see that the accuracy of KNN has been increased to 86.15\% and the accuracy of the random forest has been increased to the 84.62\% which is obviously better compared with former results. (see Figure \ref{knn2} and Figure \ref{rf2})
+Because the size of the samples is already small enough, we didn’t use PCA method to reduce the dimension of the samples this time. We directly apply the kNN method to the samples. We split the whole samples into training set and test set. Then we use the kNN and random forests to see wether the outcome improved. From the code, we can see that the accuracy of kNN has been increased to 86.15\% and the accuracy of the random forests has been increased to the 84.62\% which is obviously better compared with former results. (see Figure \ref{kNN2} and Figure \ref{rf2})
 
 \begin{figure}[h]
 \begin{center}
-   \includegraphics[width=1\linewidth]{figures/knn2.png}
+   \includegraphics[width=1\linewidth]{figures/kNN2.png}
 \end{center}
-   \caption{The accuracy of improved KNN algorithm.}
-\label{knn2}
+   \caption{The accuracy of improved kNN algorithm.}
+\label{kNN2}
 \end{figure}
 
 \begin{figure}[h]
 \begin{center}
    \includegraphics[width=1\linewidth]{figures/rf2.png}
 \end{center}
-   \caption{The accuracy of improved random forest algorithm.}
+   \caption{The accuracy of improved random forests algorithm.}
 \label{rf2}
 \end{figure}
 
 However, the most important part is still a struggle place in this method. The accuracy of the classification of whole mammography is still very low. We tried to use the expectation of the number of negative squares to determine whether the sample is normal or abnormal. But the result is not adorable, which may due to the accuracy of the algorithm being still low. We are still finding how to make it a more applicable method.
 
-\subsection{CNN}
+\subsection{ANN}
 
-Compared with KNN and random forest, CNN is much better to deal with this kind of problems. 
+Compared with kNN and random forest, ANN is much better to deal with this kind of problems. 
 
-Convolutional Neural Network is really a good method to deal with images. We tried VGG16 in this project (the code and pre-trained model can be found in \url{https://www.kaggle.com/kmader/pretrained-vgg16-for-mammography-classification/notebook}). VGG16 is a basic method with totally 16 layers in the model. To use this method, we also balanced the distribution of the dataset since there are 70 percent of samples with class Normal. Then, from the result, we can see that compared with KNN and random forest, CNN is much outstanding. (See Figure \ref{CNN})
+Convolutional Neural Network is really a good method to deal with images. We tried VGG16 in this project (the code and pre-trained model can be found in \url{https://www.kaggle.com/kmader/pretrained-vgg16-for-mammography-classification/notebook}). VGG16 is a basic method with totally 16 layers in the model. To use this method, we also balanced the distribution of the dataset since there are 70 percent of samples with class Normal. Then, from the result, we can see that compared with kNN and random forest, ANN is much outstanding. (See Figure \ref{ANN})
 
 \begin{figure}[h]
 \begin{center}
-   \includegraphics[width=1\linewidth]{figures/CNN.png}
+   \includegraphics[width=1\linewidth]{figures/ANN.png}
 \end{center}
-   \caption{The accuracy of CNN VGG16.}
-\label{CNN}
+   \caption{The accuracy of ANN VGG16.}
+\label{ANN}
 \end{figure}
 
 \section{Results and Discussion}
 
-From the result from the experiments (see Table \ref{result}), we can see that while treating well processed datasets, KNN and random forest are truly efficient and well-performed. However, when facing the dataset that is not that standard, their limitations are undoubtedly revealed. We can see that KNN and random forest are easily affected by the position and size of the cancer core. And the degree of the gray scale which is determined by the thickness of the fat and muscle also result in the misclassification in the model. Even though the improved KNN and random forest's results seem perfect, the most important part is still not solved in this report. That is the classification of the whole mammography. We are still work on this part to find a way to complish it.
+From the result from the experiments (see Table \ref{result}), we can see that while treating well processed datasets, kNN and random forests are truly efficient and well-performed. However, when facing the dataset that is not that standard, their limitations are undoubtedly revealed. We can see that kNN and random forests are easily affected by the position and size of the cancer core. And the degree of the gray scale which is determined by the thickness of the fat and muscle also result in the misclassification in the model. Even though the improved kNN and random forest's results seem perfect, the most important part is still not solved in this report. That is the classification of the whole mammography. We are still work on this part to find a way to complish it.
 
-Compared with the KNN and random forest, CNN is much more robust to deal with the noised dataset. While treating the 7 classification problem, we can see that CNN's precision of the classification is much more acceptable than KNN, which is average 72\% and its recall ratios for abnormal classes are all high enough. However, it is much more time-consuming than the other two in this problem, while it will use about 380s every epoch and about half an hour all 5 epochs (differs on different computers). Besides, from the outcome of CNN in this problem, we can see that the recall ratio of normal samples are really low. That is because the CNN algorithm class almost all the samples into abnormal ones. This may caused by the distribution balance part. But due to the time limitation, we can't find out why. We will try to fix this problem in the future study.
+Compared with the kNN and random forest, ANN is much more robust to deal with the noised dataset. While treating the 7 classification problem, we can see that ANN's precision of the classification is much more acceptable than kNN, which is average 72\% and its recall ratios for abnormal classes are all high enough. However, it is much more time-consuming than the other two in this problem, while it will use about 380s every epoch and about half an hour all 5 epochs (differs on different computers). Besides, from the outcome of ANN in this problem, we can see that the recall ratio of normal samples are really low. That is because the ANN algorithm class almost all the samples into abnormal ones. This may caused by the distribution balance part. But due to the time limitation, we can't find out why. We will try to fix this problem in the future study.
 
 \begin{table}[h]
 \begin{center}
@@ -226,11 +277,11 @@ Compared with the KNN and random forest, CNN is much more robust to deal with th
 \hline
 Method & Precision & Recall\\
 \hline\hline
-KNN & $39 \pm 3$ \% & $61 \pm 3$ \%\\
+kNN & $39 \pm 3$ \% & $61 \pm 3$ \%\\
 R. F. & $47 \pm 3$ \% & $58 \pm 3$ \%\\
-KNN (Binary) & $85 \pm 3$ \% & $86 \pm 3$ \%\\
+kNN (Binary) & $85 \pm 3$ \% & $86 \pm 3$ \%\\
 R. F. (Binary) & $84 \pm 3$ \% & $85 \pm 3$ \%\\
-CNN & $72 \pm 3$ \% & $24 \pm 3$ \%\\
+ANN & $72 \pm 3$ \% & $24 \pm 3$ \%\\
 \hline
 \end{tabular}
 \end{center}
@@ -240,14 +291,7 @@ CNN & $72 \pm 3$ \% & $24 \pm 3$ \%\\
 
 \section{Conclusions}
 
-Describe your conclusions here. If there are any future directions, you can
-describe them here, or you can create a new section for future directions.
-
 \section{Acknowledgements}
-
-List acknowledgements if any. For example, if someone provided you a dataset, or
-you used someone else's resources, this is a good place to acknowledge
-the help or support you received.
 
 \section{Contributions}
 
@@ -279,7 +323,7 @@ Result evaluating - Nemo, Dan
 
 {\small
 \bibliographystyle{ieee}
-\bibliography{bibliography.bib}
+\bibliography{ref}
 }
 
 \end{document}

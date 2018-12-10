@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}\itemsep=-1pt
+
+\bibitem{barandiaran1998random}
+I.~Barandiaran.
+\newblock The random subspace method for constructing decision forests.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  20(8), 1998.
+
+\bibitem{ho1995random}
+T.~K. Ho.
+\newblock Random decision forests.
+\newblock In {\em Document analysis and recognition, 1995., proceedings of the
+  third international conference on}, volume~1, pages 278--282. IEEE, 1995.
+
+\bibitem{simonyan2014very}
+K.~Simonyan and A.~Zisserman.
+\newblock Very deep convolutional networks for large-scale image recognition.
+\newblock {\em arXiv preprint arXiv:1409.1556}, 2014.
+
+\end{thebibliography}
