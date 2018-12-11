@@ -53,31 +53,29 @@ Third Author\\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
-   The abstract for your project goes here. The length of the abstract
-   should be between 200-250 words. Tips for writing a good abstract
-   can be found at \url{https://writing.wisc.edu/Handbook/presentations_abstracts.html}.
+   Our research goal is to build a model that can correctly classify abnormalities in mammogram screenings. To build the model, 322 mammogram screening images provided by the University of Cambridge were used. Initially, basic kNN and Random Forest approaches were applied. Cross validation was used to with a training and validation set to select the best parameters for our models. We used a 70-30 training to test split for all models discussed. Various steps were taken to preprocess the data and principal component analysis was used for dimension reduction. These results were quite poor. To improve these models, a different image preprocessing approach was taken that takes into account the positioning of the cancer core and the problem was changed to binary classification of either a normal or abnormal mammogram screening. These models performed much better with accuracy ratings around 85\%, but they failed to address the original classification problem. Because of this, we turned to an Artificial Neural network approach. Convolutional Neural networks are good with handling images, so tried the VGG16 method, which has 16 layers. The distribution of the dataset was balanced before application. This approach was significantly better than the original kNN and Random Forest approach at handling the noise, with a precision rate of 0.72. However, the recall rate was troublingly low at 0.24 which puts into question the effectiveness of this approach as well. 
+
 \end{abstract}
 
 %%%%%%%%% BODY TEXT
 \section{Introduction}
 
-In the America, about 1 in 8 women will develop breast cancer at some point in their lifetime. Over 40,000 women are expected to die in 2018 from this disease. Mammogram screens, which are X-Ray pictures of the breast, are currently the best test for doctors to identify this cancer as early as possible. Sometimes, they are able to identify the disease up to two years before it can be physically felt, which can be crucial in preventing fatality.
+In the America, about 1 in 8 women will develop breast cancer at some point in their lifetime. Over 40,000 women are expected to die in 2018 from this disease.\cite{breastcancer.org} Mammogram screens, which are X-Ray pictures of the breast, are currently the best test for doctors to identify this cancer as early as possible. Sometimes, they are able to identify the disease up to two years before it can be physically felt, which can be crucial in preventing fatality.\cite{webmd} 
 
 It’s important to note the difference between two types of mammograms: screening and diagnostic. Mammogram screens are routinely implemented to check for any abnormalities. If an abnormality is found, it calls for further inspection and possibly a follow up diagnostic test. This test could be a diagnostic mammogram or one of the several other alternatives, such as a biopsy. The diagnostic test will result in a benign or malignant decision for the tumor. This project is focuses on screening mammograms, which try to detect and classify any abnormalities that might signify cancer and lead to additional testing.  
 
-Despite the benefits from mammogram screens, there are serious downfalls. For starters, nearly 1 in 5 screenings will not detect breast cancer if it is present, resulting in a false-negative.  Estimates suggest that approximately 10-20\% of mammograms without breast cancer will be incorrectly diagnosed with an abnormality, resulting in a false-positive as well. Nearly half of women who get an annual mammogram over a 10-year period will receive an incorrect positive test result because of this high false-positive rate.  Not only does this create inefficiencies in the healthcare system, but it also leads to emotional stress and anxiety in women who are incorrectly diagnosed with cancer. Because of these downfalls, many people have questioned whether mammograms should be routinely implemented. 
+Despite the benefits from mammogram screens, there are serious downfalls. For starters, nearly 1 in 5 screenings will not detect breast cancer if it is present, resulting in a false-negative.  Estimates suggest that approximately 10-20\% of mammograms without breast cancer will be incorrectly diagnosed with an abnormality, resulting in a false-positive as well. Nearly half of women who get an annual mammogram over a 10-year period will receive an incorrect positive test result because of this high false-positive rate.\cite{https://www.cancer.org/cancer/breast-cancer/screening-tests-and-early-detection/mammograms/limitations-of-mammograms.html}.  Not only does this create inefficiencies in the healthcare system, but it also leads to emotional stress and anxiety in women who are incorrectly diagnosed with cancer. Because of these downfalls, many people have questioned whether mammograms should be routinely implemented. 
 
-The previous reasons have lead to our motivation in this topic. More effective diagnosis could reduce over-diagnosis, over-treatment, fatality rates, healthcare costs, and financial and emotional burden put on patients. Even marginally small improvements could prove quite meaningful; over 33 million mammograms are performed each year in the United States. 
+The previous reasons have lead to our motivation in this topic. More effective diagnosis could reduce overdiagnosis, overtreatment, fatality rates, healthcare costs, and financial and emotional burden put on patients. Even marginally small improvements could prove quite meaningful; over 33 million mammograms are performed each year in the United States.\cite{Newsroom}
+
+
 
 \section{Related Work}
 
-Within the past five years, there’s been an increase in research focused on improving the various stages of mammograms via machine learning. From literature, most work falls under two categories: Multi-Stage and End-to-End approaches. The process from screening to diagnosis can be split into three stages: detection, further analysis, and final diagnosis. There has been some, but not much, research on End-to-End approaches, which attempt to tackle all three stages of mammogram assessment. 
+Within the past five years, there’s been an increase in research focused on improving the various stages of mammograms via machine learning. From literature, most work falls under two categories: Multi-Stage and End-to-End approaches. The process from screening to diagnosis can be split into three stages: detection, further analysis, and final diagnosis. There has been some, but not much, research on End-to-End approaches, which attempt to tackle all three stages of mammogram assessment.\cite{becker_marcon_ghafoor_wurnig_frauenfelder_boss_2017}\cite{carneiro_nascimento_bradley_2015}\cite{zhu_lou_vang_xie_2016}
 
-\url{https://arxiv.org/pdf/1703.07047.pdf}
+Most research, however, focuses on addressing a singular stage in this process, such as mass detection.\cite{dhungel_carneiro_bradley_2015}\cite{ertosun_rubin_2015} Most similar to our project is the additional research that’s been done trying to classify specific regions of interest. Much of this research addresses classification by using deep convolutional neural networks\cite{rampun_scotney_morrow_wang_2018}\cite{rakhlin_shvets_iglovikov_kalinin_2018}, which is also the a method we will applying. Some of the techniques employed are more advanced and beyond the scope of our knowledge. This research also varies on the resolution of the images used as well as the preprocessing techniques. The results from this published research ranged from marginally to noticeably more effective at classifying abnormalities when we compared our evaluation metrics. 
 
-Most research, however, focuses on addressing a singular stage in this process, such as mass detection. Most similar to our project is the additional research that’s been done trying to classify specific regions of interest. Much of this research addresses classification by using deep convolutional neural networks, which is also the method we will applying. Some of the techniques employed are more advanced and beyond the scope of our knowledge. This research also varies on the resolution of the images used as well as the preprocessing techniques. 
-
-High-Resolution Breast Cancer Screening with Multi-View Deep Convolutional Neural Networks (KJ Geras, et al). 
 
 %{Table \ref{tab:some-table} shows an example for formatting a table.
 
@@ -149,7 +147,7 @@ The number of samples/trees, $B$, is a free parameter. Typically, a few hundred 
 
 \subsection{ANN}
 
-An artificial neural network(ANN) is a network of simple elements called artificial neurons, which receive input, change their internal state (activation) according to that input, and produce output depending on the input and activation. ANN can be divided into a lot of classifications according to the structure of the model (The configurations of VGG models are showed in Figure \ref{VGG}). And what we used in the report is VGG16. VGG16 is a basic method with totally 16 layers in the model. \cite{simonyan2014very} 
+An artificial neural network(ANN) is a network of simple elements called artificial neurons, which receive input, change their internal state (activation) according to that input, and produce output depending on the input and activation. ANN can be divided into a lot of classifications according to the structure of the model (The configurations of VGG models are showed in Figure \ref{VGG}). And what we used in the report is VGG16. VGG16 is a basic method with a total of 16 layers in the model. \cite{simonyan2014very} 
 
 \begin{figure}[t]
 \begin{center}
@@ -291,7 +289,18 @@ ANN & $72 \pm 3$ \% & $24 \pm 3$ \%\\
 
 \section{Conclusions}
 
+The initial goal was to build a model that could effectively diagnose and classify mammogram abnormalities. The results from our ANN model were considerably more effective than the kNN and Random Forest approach, but the results are troubling because of its low recall rate. Compared to past research and literature, these results were not great, as other’s work has performed noticeably better at times. 
+
+However, these results should not be discouraging. Although the model wasn’t fantastic and will not be publication worthy, it was a good learning experience with ample room for improvement. More time, experience, and expertise on these topics can eventually lead to better and more meaningful results. 
+
+While we focused on the classification of abnormalities in cancer screening, there are still a lot of related avenues for future exploration. While we attempted diagnosis for a binary classification on screening mammograms, future research could extend to studying images that have already been screened and referred to a physical diagnostic test. Additionally, research into diagnostic image testing extends far beyond mammograms and can be applied to an array of health issues. We consider our project a success in the sense that it has deepened our interest in machine learning and public health and will likely encourage a deeper pursuit of these topics, this time with a stronger foundation. 
+
+
+
 \section{Acknowledgements}
+
+Our work was conducted for a class project and out of personal interest, and did not receive any funding from outside sources. Our professor, Sebastian Raschka, provided us with much of the foundational material for learning the machine learning techniques applied in this paper. 
+
 
 \section{Contributions}
 
