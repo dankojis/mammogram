@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: report.aux
+The style file: ieee.bst
+Database file #1: ref.bib
+I was expecting a `,' or a `}'---line 41 of file ref.bib
+ : @misc{american 
+ :                cancer society, title={Limitations of Mammograms | How Often are Mammograms Wrong?}, url={https://www.cancer.org/cancer/breast-cancer/screening-tests-and-early-detection/mammograms/limitations-of-mammograms.html}, journal={American Cancer Society}}
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "https://www.cancer.org/cancer/breast-cancer/screening-tests-and-early-detection/mammograms/limitations-of-mammograms.html"
+Warning--to sort, need author or key in breastcancer.org
+Warning--to sort, need author or key in webmd
+Warning--to sort, need author or key in Newsroom
+Warning--empty journal in rakhlin_shvets_iglovikov_kalinin_2018
+Warning--empty journal in zhu_lou_vang_xie_2016
+You've used 13 entries,
+            2120 wiz_defined-function locations,
+            561 strings with 6135 characters,
+and the built_in function-call counts, 3719 in all, are:
+= -- 351
+> -- 181
+< -- 3
++ -- 75
+- -- 60
+* -- 224
+:= -- 605
+add.period$ -- 34
+call.type$ -- 13
+change.case$ -- 69
+chr.to.int$ -- 0
+cite$ -- 18
+duplicate$ -- 155
+empty$ -- 289
+format.name$ -- 60
+if$ -- 787
+int.to.chr$ -- 0
+int.to.str$ -- 13
+missing$ -- 10
+newline$ -- 62
+num.names$ -- 20
+pop$ -- 87
+preamble$ -- 1
+purify$ -- 56
+quote$ -- 0
+skip$ -- 140
+stack$ -- 0
+substring$ -- 144
+swap$ -- 41
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 52
+warning$ -- 5
+while$ -- 25
+width$ -- 15
+write$ -- 121
+(There was 1 error message)
