@@ -1,0 +1,86 @@
+\begin{thebibliography}{10}\itemsep=-1pt
+
+\bibitem{Newsroom}
+A better future.
+
+\bibitem{webmd}
+Breast cancer detection.
+
+\bibitem{breastcancer.org}
+U.s. breast cancer statistics.
+
+\bibitem{barandiaran1998random}
+I.~Barandiaran.
+\newblock The random subspace method for constructing decision forests.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  20(8), 1998.
+
+\bibitem{becker_marcon_ghafoor_wurnig_frauenfelder_boss_2017}
+A.~S. Becker, M.~Marcon, S.~Ghafoor, M.~C. Wurnig, T.~Frauenfelder, and
+  A.~Boss.
+\newblock Deep learning in mammography.
+\newblock {\em Investigative Radiology}, 52(7):434–440, 2017.
+
+\bibitem{carneiro_nascimento_bradley_2015}
+G.~Carneiro, J.~Nascimento, and A.~P. Bradley.
+\newblock Unregistered multiview mammogram analysis with pre-trained deep
+  learning models.
+\newblock {\em Lecture Notes in Computer Science Medical Image Computing and
+  Computer-Assisted Intervention – MICCAI 2015}, page 652–660, 2015.
+
+\bibitem{dhungel_carneiro_bradley_2015}
+N.~Dhungel, G.~Carneiro, and A.~P. Bradley.
+\newblock Automated mass detection in mammograms using cascaded deep learning
+  and random forests.
+\newblock {\em 2015 International Conference on Digital Image Computing:
+  Techniques and Applications (DICTA)}, 2015.
+
+\bibitem{ertosun_rubin_2015}
+M.~G. Ertosun and D.~L. Rubin.
+\newblock Probabilistic visual search for masses within mammography images
+  using deep learning.
+\newblock {\em 2015 IEEE International Conference on Bioinformatics and
+  Biomedicine (BIBM)}, 2015.
+
+\bibitem{ho1995random}
+T.~K. Ho.
+\newblock Random decision forests.
+\newblock In {\em Document analysis and recognition, 1995., proceedings of the
+  third international conference on}, volume~1, pages 278--282. IEEE, 1995.
+
+\bibitem{huynh_li_giger_2016}
+B.~Q. Huynh, H.~Li, and M.~L. Giger.
+\newblock Digital mammographic tumor classification using transfer learning
+  from deep convolutional neural networks.
+\newblock {\em Journal of Medical Imaging}, 3(3):034501, 2016.
+
+\bibitem{rakhlin_shvets_iglovikov_kalinin_2018}
+A.~Rakhlin, A.~Shvets, V.~Iglovikov, and A.~Kalinin.
+\newblock Deep convolutional neural networks for breast cancer histology image
+  analysis.
+\newblock May 2018.
+
+\bibitem{rampun_scotney_morrow_wang_2018}
+A.~Rampun, B.~W. Scotney, P.~J. Morrow, and H.~Wang.
+\newblock Breast mass classification in mammograms using ensemble convolutional
+  neural networks.
+\newblock {\em 2018 IEEE 20th International Conference on e-Health Networking,
+  Applications and Services (Healthcom)}, 2018.
+
+\bibitem{rong_shasha_qingzheng_kun_2018}
+F.~Rong, L.~Shasha, X.~Qingzheng, and L.~Kun.
+\newblock A detection algorithm based on convolutional neural network.
+\newblock 2018.
+
+\bibitem{simonyan2014very}
+K.~Simonyan and A.~Zisserman.
+\newblock Very deep convolutional networks for large-scale image recognition.
+\newblock {\em arXiv preprint arXiv:1409.1556}, 2014.
+
+\bibitem{zhu_lou_vang_xie_2016}
+W.~Zhu, Q.~Lou, Y.~S. Vang, and X.~Xie.
+\newblock Deep multi-instance networks with sparse label assignment for whole
+  mammogram classification.
+\newblock 2016.
+
+\end{thebibliography}
